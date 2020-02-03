@@ -11,4 +11,13 @@ ConfAPI for Bitbucket
 
 REST API for automated Bitbucket configuration.
 
-https://developer.atlassian.com/display/DOCS/Introduction+to+the+Atlassian+Plugin+SDK
+Related Documentation
+---------------------
+
+* [Atlassian REST API design guidelines version 1](https://developer.atlassian.com/server/framework/atlassian-sdk/atlassian-rest-api-design-guidelines-version-1/)
+* [Introduction to the Atlassian Plugin SDK](https://developer.atlassian.com/display/DOCS/Introduction+to+the+Atlassian+Plugin+SDK)
+
+Resources
+---------
+
+Documentation in README TBD, use REST-API Browser [url_to_bitbucket]/plugins/servlet/restbrowser in order to examine REST endpoints.

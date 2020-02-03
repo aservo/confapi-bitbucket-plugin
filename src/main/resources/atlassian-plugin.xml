@@ -15,5 +15,6 @@
         <context>bitbucket-confapi-plugin</context>
     </web-resource>
 
-    <rest name="My Rest Resource" key="my-rest-resource" path="/myrestresource" version="1.0" />
+    <rest key="aservo-confapi-rest" name="ConfAPI REST" path="/confapi" version="1"/>
+
 </atlassian-plugin>
