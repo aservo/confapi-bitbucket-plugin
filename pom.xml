@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
@@ -45,15 +44,23 @@
             <organization>ASERVO Software GmbH</organization>
             <organizationUrl>https://www.aservo.com</organizationUrl>
         </developer>
+        <developer>
+            <name>Kai Lehmann</name>
+            <email>klehmann@aservo.com</email>
+            <organization>ASERVO Software GmbH</organization>
+            <organizationUrl>https://www.aservo.com</organizationUrl>
+        </developer>
     </developers>
 
     <properties>
-        <amps.version>8.0.0</amps.version>
+        <amps.version>8.0.2</amps.version>
         <bitbucket.version>5.16.0</bitbucket.version>
         <bitbucket.data.version>${bitbucket.version}</bitbucket.data.version>
         <!-- This property ensures consistency between the key in atlassian-plugin.xml and the OSGi bundle's key. -->
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.7</atlassian.spring.scanner.version>
+        <atlassian.plugins.rest.version>5.0.1</atlassian.plugins.rest.version>
+        <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
         <javax.inject.version>1</javax.inject.version>
         <jsr311.version>1.1.1</jsr311.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
@@ -72,6 +79,7 @@
     </dependencyManagement>
 
     <dependencies>
+        <!--Atlassian dependencies-->
         <dependency>
             <groupId>com.atlassian.bitbucket.server</groupId>
             <artifactId>bitbucket-api</artifactId>
@@ -79,8 +87,9 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.bitbucket.server</groupId>
-            <artifactId>bitbucket-spi</artifactId>
+            <groupId>com.atlassian.plugins.rest</groupId>
+            <artifactId>atlassian-rest-common</artifactId>
+            <version>${atlassian.plugins.rest.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -92,31 +101,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.sal</groupId>
-            <artifactId>sal-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <version>${javax.inject.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>jsr311-api</artifactId>
             <version>${jsr311.version}</version>
@@ -124,18 +108,18 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.commons</groupId>
-            <artifactId>commons-lang3</artifactId>
-            <scope>provided</scope>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.plugins</groupId>
-            <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
-            <version>${plugin.testrunner.version}</version>
-            <scope>test</scope>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>2.2.6</version>
         </dependency>
 
+        <!--test dependencies-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -143,37 +127,16 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>servlet-api</artifactId>
-            <version>2.4</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.plugins.rest</groupId>
-            <artifactId>atlassian-rest-common</artifactId>
-            <version>1.0.2</version>
-            <scope>provided</scope>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.8.5</version>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.wink</groupId>
             <artifactId>wink-client</artifactId>
             <version>1.4</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.mockito</groupId>
-            <artifactId>mockito-all</artifactId>
-            <version>1.8.5</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -186,6 +149,8 @@
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <enableQuickReload>true</enableQuickReload>
+                    <allowGoogleTracking>false</allowGoogleTracking>
                     <products>
                         <product>
                             <id>bitbucket</id>
@@ -199,7 +164,9 @@
                         <!-- Add package to export here -->
                         <Export-Package/>
                         <!-- Add package import here -->
-                        <Import-Package>*</Import-Package>
+                        <Import-Package>
+                            *
+                        </Import-Package>
                         <!-- Ensure plugin is Spring powered -->
                         <Spring-Context>*</Spring-Context>
                     </instructions>
