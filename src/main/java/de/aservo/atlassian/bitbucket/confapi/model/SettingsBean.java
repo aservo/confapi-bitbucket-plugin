@@ -11,6 +11,7 @@ import javax.validation.constraints.Size;
 public class SettingsBean {
 
     @NotNull
+    @Size(min = 1)
     private String baseUrl;
 
     @NotNull
