@@ -1,5 +1,6 @@
 package de.aservo.atlassian.bitbucket.confapi.rest.controller;
 
+import com.atlassian.annotations.PublicApi;
 import de.aservo.atlassian.bitbucket.confapi.model.SettingsBean;
 import de.aservo.atlassian.bitbucket.confapi.rest.RestResource;
 import de.aservo.atlassian.bitbucket.confapi.service.AdminService;
@@ -10,6 +11,7 @@ import javax.ws.rs.core.Response;
 import java.net.URI;
 import java.util.Objects;
 
+@PublicApi
 @Path("settings")
 public class AdminController extends RestResource {
 
@@ -38,12 +40,9 @@ public class AdminController extends RestResource {
     @Produces({MediaType.APPLICATION_JSON})
     public Response setGeneralSettings(SettingsBean settings) {
         try {
-            if (settings.getBaseUrl() != null) {
-                adminService.getPropertiesService().setBaseURL(URI.create(settings.getBaseUrl()));
-            }
-            if (settings.getDisplayName() != null) {
-                adminService.getPropertiesService().setDisplayName(settings.getDisplayName());
-            }
+            validateInputs(settings);
+            adminService.getPropertiesService().setBaseURL(URI.create(settings.getBaseUrl()));
+            adminService.getPropertiesService().setDisplayName(settings.getDisplayName());
             return getGeneralSettings();
         } catch (Exception e) {
             return buildErrorResponse(e);

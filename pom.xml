@@ -46,6 +46,8 @@
         </dependencies>
     </dependencyManagement>
     <dependencies>
+
+        <!--Atlassian dependencies-->
         <dependency>
             <groupId>com.atlassian.bitbucket.server</groupId>
             <artifactId>bitbucket-api</artifactId>
@@ -56,14 +58,12 @@
             <artifactId>bitbucket-spi</artifactId>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
             <artifactId>atlassian-rest-common</artifactId>
             <version>${atlassian.plugins.rest.version}</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
             <artifactId>atlassian-rest-doclet</artifactId>
@@ -121,7 +121,23 @@
             <artifactId>commons-lang3</artifactId>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.el</groupId>
+            <artifactId>javax.el-api</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>javax.el</artifactId>
+            <version>2.2.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
+        <!--test dependencies-->
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
             <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
@@ -131,6 +147,11 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>
