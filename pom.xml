@@ -1,19 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>de.aservo</groupId>
+        <artifactId>parent-pom</artifactId>
+        <version>0.0.4</version>
+    </parent>
 
     <groupId>de.aservo.atlassian</groupId>
     <artifactId>bitbucket-confapi-plugin</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
-    <name>bitbucket-confapi-plugin</name>
-    <description>This is the de.aservo.atlassian:bitbucket-confapi-plugin plugin for Atlassian Bitbucket Server.</description>
+    <name>ConfAPI for Bitbucket</name>
+    <description>REST API for automated Bitbucket configuration.</description>
 
-    <organization>
-        <name>ASERVO</name>
-        <url>http://www.aservo.com/</url>
-    </organization>
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <issueManagement>
+        <system>Github</system>
+        <url>https://github.com/aservo/bitbucket-confapi-plugin/issues</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:git://github.com/aservo/bitbucket-confapi-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:aservo/bitbucket-confapi-plugin.git</developerConnection>
+        <url>https://github.com/aservo/bitbucket-confapi-plugin</url>
+    </scm>
+
+    <developers>
+        <developer>
+            <name>Patrick Hobusch</name>
+            <email>phobusch@aservo.com</email>
+            <organization>ASERVO Software GmbH</organization>
+            <organizationUrl>https://www.aservo.com</organizationUrl>
+        </developer>
+        <developer>
+            <name>Kai Lehmann</name>
+            <email>klehmann@aservo.com</email>
+            <organization>ASERVO Software GmbH</organization>
+            <organizationUrl>https://www.aservo.com</organizationUrl>
+        </developer>
+    </developers>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
