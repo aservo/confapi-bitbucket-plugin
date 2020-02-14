@@ -1,0 +1,19 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}"/>
+        <param name="plugin-icon">images/aservo.png</param>
+        <param name="plugin-logo">images/aservo.png</param>
+    </plugin-info>
+
+    <resource type="i18n" name="i18n" location="aservo-bitbucket-confapi-plugin"/>
+
+    <web-resource key="bitbucket-confapi-plugin-resources" name="bitbucket-confapi-plugin Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        <resource type="download" name="images/" location="/images"/>
+        <context>bitbucket-confapi-plugin</context>
+    </web-resource>
+
+    <rest name="My Rest Resource" key="my-rest-resource" path="/myrestresource" version="1.0" />
+</atlassian-plugin>
