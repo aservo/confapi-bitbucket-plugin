@@ -1,7 +1,5 @@
 package de.aservo.atlassian.bitbucket.confapi.rest;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.validation.*;
@@ -12,19 +10,12 @@ import java.util.stream.Collectors;
 
 public class RestResource {
 
-    private ObjectMapper jacksonMapper = new JacksonMapper().getContext(null);
-
     protected Response buildErrorResponse(Exception e) {
         return buildErrorResponse(e.getMessage());
     }
 
     protected Response buildErrorResponse(String message) {
-        try {
-            String errorJson = jacksonMapper.writeValueAsString(new ErrorMessage(message));
-            return Response.status(Response.Status.BAD_REQUEST).entity(errorJson).build();
-        } catch (JsonProcessingException e) {
-            return Response.status(Response.Status.BAD_REQUEST).entity(e.toString()).build();
-        }
+        return Response.status(Response.Status.BAD_REQUEST).entity((new ErrorMessage(message))).build();
     }
 
     protected void validateInputs(Object bean) throws ValidationException {
@@ -37,9 +28,5 @@ public class RestResource {
             }).collect(Collectors.toList());
             throw new ValidationException(StringUtils.join(collect, "\n"));
         }
-    }
-
-    protected String wrapObject(Object o) throws JsonProcessingException {
-        return jacksonMapper.writeValueAsString(o);
     }
 }

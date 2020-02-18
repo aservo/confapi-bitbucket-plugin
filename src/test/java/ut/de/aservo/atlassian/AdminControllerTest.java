@@ -2,10 +2,8 @@ package ut.de.aservo.atlassian;
 
 import com.atlassian.bitbucket.server.ApplicationMode;
 import com.atlassian.bitbucket.server.ApplicationPropertiesService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import de.aservo.atlassian.bitbucket.confapi.model.SettingsBean;
 import de.aservo.atlassian.bitbucket.confapi.rest.ErrorMessage;
-import de.aservo.atlassian.bitbucket.confapi.rest.JacksonMapper;
 import de.aservo.atlassian.bitbucket.confapi.rest.controller.AdminController;
 import de.aservo.atlassian.bitbucket.confapi.service.AdminService;
 import org.junit.Before;
@@ -21,6 +19,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
@@ -39,11 +38,8 @@ public class AdminControllerTest {
 
     private AdminController adminController;
 
-    private ObjectMapper jacksonMapper;
-
     @Before
     public void setup() {
-        jacksonMapper = new JacksonMapper().getContext(null);
         adminService = new AdminService(applicationPropertiesService);
         adminController = new AdminController(adminService);
     }
@@ -56,7 +52,7 @@ public class AdminControllerTest {
         when(adminService.getPropertiesService().getMode()).thenReturn(ApplicationMode.DEFAULT);
 
         final Response response = adminController.getGeneralSettings();
-        jacksonMapper.readValue(response.getEntity().toString(), SettingsBean.class);
+        assertThat(response.getEntity(), instanceOf(SettingsBean.class));
     }
 
     @Test
@@ -70,7 +66,7 @@ public class AdminControllerTest {
         settingsBean.setBaseUrl("http://localhost:7990/bitbucket");
         settingsBean.setDisplayName("Bitbucket");
         final Response response = adminController.setGeneralSettings(settingsBean);
-        jacksonMapper.readValue(response.getEntity().toString(), SettingsBean.class);
+        assertThat(response.getEntity(), instanceOf(SettingsBean.class));
     }
 
     @Test
@@ -79,10 +75,10 @@ public class AdminControllerTest {
         settingsBean.setBaseUrl(":::");
         settingsBean.setDisplayName("Bitbucket");
         final Response response = adminController.setGeneralSettings(settingsBean);
-        String respStr = response.getEntity().toString();
-        System.out.println(respStr);
-        ErrorMessage errorMessage = jacksonMapper.readValue(respStr, ErrorMessage.class);
+        assertThat(response.getEntity(), instanceOf(ErrorMessage.class));
+        ErrorMessage errorMessage = (ErrorMessage) response.getEntity();
         assertThat(errorMessage.getMessage(), notNullValue());
+        System.out.println(errorMessage.getMessage());
     }
 
     @Test
@@ -91,9 +87,9 @@ public class AdminControllerTest {
         settingsBean.setBaseUrl("localhost");
         settingsBean.setDisplayName("");
         final Response response = adminController.setGeneralSettings(settingsBean);
-        String respStr = response.getEntity().toString();
-        System.out.println(respStr);
-        ErrorMessage errorMessage = jacksonMapper.readValue(respStr, ErrorMessage.class);
+        assertThat(response.getEntity(), instanceOf(ErrorMessage.class));
+        ErrorMessage errorMessage = (ErrorMessage) response.getEntity();
         assertThat(errorMessage.getMessage(), notNullValue());
+        System.out.println(errorMessage.getMessage());
     }
 }

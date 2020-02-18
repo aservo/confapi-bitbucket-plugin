@@ -29,7 +29,7 @@ public class AdminController extends RestResource {
             settings.setBaseUrl(Objects.requireNonNull(adminService.getPropertiesService().getBaseUrl()).toString());
             settings.setDisplayName(adminService.getPropertiesService().getDisplayName());
             settings.setMode(adminService.getPropertiesService().getMode().toString());
-            return Response.ok(wrapObject(settings)).build();
+            return Response.ok(settings).build();
         } catch (Exception e) {
             return buildErrorResponse(e);
         }
