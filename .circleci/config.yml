@@ -41,7 +41,7 @@ jobs:
           key: bitbucket-confapi-plugin-{{ checksum "pom.xml" }}
       - run:
           name: Run Unit Tests
-          command: mvn test
+          command: mvn package
       - run:
           name: Analyze on SonarCloud
           command: mvn sonar:sonar -DskipTests
