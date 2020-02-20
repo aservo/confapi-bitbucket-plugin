@@ -1,10 +1,11 @@
 package de.aservo.atlassian.bitbucket.confapi.rest;
 
 import com.atlassian.bitbucket.server.ApplicationPropertiesService;
-import com.atlassian.plugin.spring.scanner.annotation.component.BitbucketComponent;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.atlassian.bitbucket.confapi.model.SettingsBean;
 
+import javax.inject.Inject;
+import javax.inject.Named;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -15,12 +16,13 @@ import javax.ws.rs.core.Response;
 
 @Path("settings")
 @Produces({MediaType.APPLICATION_JSON})
-@BitbucketComponent
+@Named
 public class SettingsResource {
 
     @ComponentImport
     private final ApplicationPropertiesService applicationPropertiesService;
 
+    @Inject
     public SettingsResource(
             final ApplicationPropertiesService applicationPropertiesService) {
 
