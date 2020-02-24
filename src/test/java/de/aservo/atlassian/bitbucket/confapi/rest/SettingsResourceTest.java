@@ -2,6 +2,7 @@ package de.aservo.atlassian.bitbucket.confapi.rest;
 
 import com.atlassian.bitbucket.server.ApplicationMode;
 import com.atlassian.bitbucket.server.ApplicationPropertiesService;
+import de.aservo.atlassian.bitbucket.confapi.helper.WebAuthenticationHelper;
 import de.aservo.atlassian.bitbucket.confapi.model.SettingsBean;
 import org.junit.Before;
 import org.junit.Test;
@@ -25,6 +26,9 @@ public class SettingsResourceTest {
     @Mock
     private ApplicationPropertiesService applicationPropertiesService;
 
+    @Mock
+    private WebAuthenticationHelper webAuthenticationHelper;
+
     private SettingsResource settingsResource;
 
     @Before
@@ -33,13 +37,16 @@ public class SettingsResourceTest {
         when(applicationPropertiesService.getMode()).thenReturn(ApplicationMode.valueOf(MODE));
         when(applicationPropertiesService.getDisplayName()).thenReturn(TITLE);
 
-        settingsResource = new SettingsResource(applicationPropertiesService);
+        settingsResource = new SettingsResource(
+                applicationPropertiesService, webAuthenticationHelper);
     }
 
     @Test
     public void testGetSettings() {
         final Response response = settingsResource.getSettings();
         final SettingsBean bean = (SettingsBean) response.getEntity();
+
+        verify(webAuthenticationHelper).mustBeSysAdmin();
 
         assertEquals(applicationPropertiesService.getBaseUrl(), bean.getBaseurl());
         assertEquals(applicationPropertiesService.getMode(), bean.getMode());
@@ -50,6 +57,8 @@ public class SettingsResourceTest {
     public void testSetSettings() {
         final SettingsBean settingsBean = SettingsBean.from(applicationPropertiesService);
         final Response response = settingsResource.putSettings(settingsBean);
+
+        verify(webAuthenticationHelper).mustBeSysAdmin();
 
         assertNotNull(applicationPropertiesService.getBaseUrl());
         assertNotNull(applicationPropertiesService.getDisplayName());
