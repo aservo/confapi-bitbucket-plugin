@@ -4,7 +4,7 @@ import com.atlassian.bitbucket.server.ApplicationMode;
 import com.atlassian.bitbucket.server.ApplicationPropertiesService;
 import de.aservo.atlassian.bitbucket.confapi.model.SettingsBean;
 import de.aservo.atlassian.bitbucket.confapi.rest.ErrorMessage;
-import de.aservo.atlassian.bitbucket.confapi.rest.controller.AdminController;
+import de.aservo.atlassian.bitbucket.confapi.resource.SettingsResource;
 import de.aservo.atlassian.bitbucket.confapi.service.AdminService;
 import org.junit.Before;
 import org.junit.Rule;
@@ -36,12 +36,12 @@ public class AdminControllerTest {
     @Mock
     private AdminService adminService;
 
-    private AdminController adminController;
+    private SettingsResource adminController;
 
     @Before
     public void setup() {
         adminService = new AdminService(applicationPropertiesService);
-        adminController = new AdminController(adminService);
+        adminController = new SettingsResource(adminService);
     }
 
     @Test

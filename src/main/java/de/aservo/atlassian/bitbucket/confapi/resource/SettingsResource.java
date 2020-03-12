@@ -1,6 +1,8 @@
-package de.aservo.atlassian.bitbucket.confapi.rest.controller;
+package de.aservo.atlassian.bitbucket.confapi.resource;
 
 import com.atlassian.annotations.PublicApi;
+import com.sun.jersey.spi.container.ResourceFilters;
+import de.aservo.atlassian.bitbucket.confapi.filter.AdminOnlyResourceFilter;
 import de.aservo.atlassian.bitbucket.confapi.model.SettingsBean;
 import de.aservo.atlassian.bitbucket.confapi.rest.RestResource;
 import de.aservo.atlassian.bitbucket.confapi.service.AdminService;
@@ -13,11 +15,12 @@ import java.util.Objects;
 
 @PublicApi
 @Path("settings")
-public class AdminController extends RestResource {
+@ResourceFilters(AdminOnlyResourceFilter.class)
+public class SettingsResource extends RestResource {
 
     private final AdminService adminService;
 
-    public AdminController(AdminService adminService) {
+    public SettingsResource(AdminService adminService) {
         this.adminService = adminService;
     }
 
