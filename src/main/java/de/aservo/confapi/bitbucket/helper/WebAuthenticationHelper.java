@@ -1,4 +1,4 @@
-package de.aservo.atlassian.bitbucket.confapi.helper;
+package de.aservo.confapi.bitbucket.helper;
 
 import com.atlassian.bitbucket.auth.AuthenticationContext;
 import com.atlassian.bitbucket.permission.Permission;

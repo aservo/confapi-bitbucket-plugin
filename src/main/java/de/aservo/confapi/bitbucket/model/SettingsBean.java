@@ -1,4 +1,4 @@
-package de.aservo.atlassian.bitbucket.confapi.model;
+package de.aservo.confapi.bitbucket.model;
 
 import com.atlassian.bitbucket.server.ApplicationMode;
 import com.atlassian.bitbucket.server.ApplicationPropertiesService;

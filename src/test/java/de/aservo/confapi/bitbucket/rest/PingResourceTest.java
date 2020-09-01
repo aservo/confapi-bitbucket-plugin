@@ -1,4 +1,4 @@
-package de.aservo.atlassian.bitbucket.confapi.rest;
+package de.aservo.confapi.bitbucket.rest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,7 +7,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.core.Response;
 
-import static de.aservo.atlassian.bitbucket.confapi.rest.PingResource.PONG;
+import static de.aservo.confapi.bitbucket.rest.PingResource.PONG;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)

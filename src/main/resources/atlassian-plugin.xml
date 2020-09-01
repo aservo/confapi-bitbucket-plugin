@@ -7,12 +7,12 @@
         <param name="plugin-logo">images/aservo.png</param>
     </plugin-info>
 
-    <resource type="i18n" name="i18n" location="aservo-bitbucket-confapi-plugin"/>
+    <resource type="i18n" name="i18n" location="aservo-confapi-bitbucket-plugin"/>
 
-    <web-resource key="bitbucket-confapi-plugin-resources" name="bitbucket-confapi-plugin Web Resources">
+    <web-resource key="confapi-bitbucket-plugin-resources" name="confapi-bitbucket-plugin Web Resources">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <resource type="download" name="images/" location="/images"/>
-        <context>bitbucket-confapi-plugin</context>
+        <context>confapi-bitbucket-plugin</context>
     </web-resource>
 
     <rest key="aservo-confapi-rest" name="ConfAPI REST" path="/confapi" version="1"/>

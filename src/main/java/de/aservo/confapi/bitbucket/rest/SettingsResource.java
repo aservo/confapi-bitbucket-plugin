@@ -1,9 +1,9 @@
-package de.aservo.atlassian.bitbucket.confapi.rest;
+package de.aservo.confapi.bitbucket.rest;
 
 import com.atlassian.bitbucket.server.ApplicationPropertiesService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.atlassian.bitbucket.confapi.helper.WebAuthenticationHelper;
-import de.aservo.atlassian.bitbucket.confapi.model.SettingsBean;
+import de.aservo.confapi.bitbucket.helper.WebAuthenticationHelper;
+import de.aservo.confapi.bitbucket.model.SettingsBean;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -55,7 +55,7 @@ public class SettingsResource {
             applicationPropertiesService.setBaseURL(settings.getBaseurl());
         }
 
-        // TODO: Cannot set mode using ApplicationPropertiesService
+        // Cannot set mode using ApplicationPropertiesService
 
         if (settings.getTitle() != null) {
             applicationPropertiesService.setDisplayName(settings.getTitle());

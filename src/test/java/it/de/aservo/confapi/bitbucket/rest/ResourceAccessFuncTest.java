@@ -1,4 +1,4 @@
-package it.de.aservo.atlassian.bitbucket.confapi.rest;
+package it.de.aservo.confapi.bitbucket.rest;
 
 import com.atlassian.bitbucket.permission.Permission;
 import com.atlassian.bitbucket.user.ApplicationUser;
@@ -18,7 +18,7 @@ import org.junit.runner.RunWith;
 import javax.inject.Inject;
 import javax.ws.rs.core.Response.Status;
 
-import static de.aservo.atlassian.bitbucket.confapi.rest.SettingsResource.SETTINGS_PATH;
+import static de.aservo.confapi.bitbucket.rest.SettingsResource.SETTINGS_PATH;
 import static org.junit.Assert.assertEquals;
 
 @RunWith(AtlassianPluginsTestRunner.class)

@@ -1,9 +1,9 @@
-package de.aservo.atlassian.bitbucket.confapi.rest;
+package de.aservo.confapi.bitbucket.rest;
 
 import com.atlassian.bitbucket.server.ApplicationMode;
 import com.atlassian.bitbucket.server.ApplicationPropertiesService;
-import de.aservo.atlassian.bitbucket.confapi.helper.WebAuthenticationHelper;
-import de.aservo.atlassian.bitbucket.confapi.model.SettingsBean;
+import de.aservo.confapi.bitbucket.helper.WebAuthenticationHelper;
+import de.aservo.confapi.bitbucket.model.SettingsBean;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import javax.ws.rs.core.Response;
 import java.net.URI;
 
-import static de.aservo.atlassian.bitbucket.confapi.model.SettingsBeanTest.*;
+import static de.aservo.confapi.bitbucket.model.SettingsBeanTest.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.verify;

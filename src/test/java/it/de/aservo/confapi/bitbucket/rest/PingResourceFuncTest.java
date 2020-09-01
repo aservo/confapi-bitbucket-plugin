@@ -1,4 +1,4 @@
-package it.de.aservo.atlassian.bitbucket.confapi.rest;
+package it.de.aservo.confapi.bitbucket.rest;
 
 import org.apache.wink.client.Resource;
 import org.apache.wink.client.RestClient;
