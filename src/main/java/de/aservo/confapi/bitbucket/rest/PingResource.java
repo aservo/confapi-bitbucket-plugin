@@ -1,4 +1,4 @@
-package de.aservo.atlassian.bitbucket.confapi.rest;
+package de.aservo.confapi.bitbucket.rest;
 
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
 
