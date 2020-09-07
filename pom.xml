@@ -52,14 +52,14 @@
     </developers>
 
     <properties>
-        <amps.version>8.0.2</amps.version>
-        <bitbucket.version>5.16.0</bitbucket.version>
+        <amps.version>8.1.1</amps.version>
+        <bitbucket.version>7.5.0</bitbucket.version>
         <bitbucket.data.version>${bitbucket.version}</bitbucket.data.version>
         <!-- This property ensures consistency between the key in atlassian-plugin.xml and the OSGi bundle's key. -->
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <atlassian.spring.scanner.version>2.1.7</atlassian.spring.scanner.version>
-        <atlassian.plugins.rest.version>5.0.1</atlassian.plugins.rest.version>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
+        <atlassian.plugins.rest.version>5.0.1</atlassian.plugins.rest.version>
+        <confapi-commons.version>0.0.18-SNAPSHOT</confapi-commons.version>
         <javax.inject.version>1</javax.inject.version>
         <jsr311.version>1.1.1</jsr311.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
@@ -76,11 +76,30 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <dependency>
+                <groupId>de.aservo</groupId>
+                <artifactId>confapi-commons</artifactId>
+                <version>${confapi-commons.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
-        <!--Atlassian dependencies-->
+
+        <!-- compile dependencies -->
+
+        <dependency>
+            <groupId>de.aservo</groupId>
+            <artifactId>confapi-commons</artifactId>
+            <version>${confapi-commons.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- provided dependencies -->
+
         <dependency>
             <groupId>com.atlassian.bitbucket.server</groupId>
             <artifactId>bitbucket-api</artifactId>
@@ -134,7 +153,16 @@
             <version>2.2.6</version>
         </dependency>
 
-        <!--test dependencies-->
+        <!-- test dependencies -->
+
+        <dependency>
+            <groupId>de.aservo</groupId>
+            <artifactId>confapi-commons</artifactId>
+            <version>${confapi-commons.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.atlassian.bitbucket.server</groupId>
             <artifactId>bitbucket-test-util</artifactId>
@@ -158,21 +186,18 @@
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.apache.wink</groupId>
             <artifactId>wink-client</artifactId>
-            <version>1.4</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
