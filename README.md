@@ -8,16 +8,11 @@ ConfAPI for Bitbucket
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aservo_confapi-bitbucket-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=aservo_confapi-bitbucket-plugin)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aservo_confapi-bitbucket-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=aservo_confapi-bitbucket-plugin)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
 REST API for automated Bitbucket configuration.
-
-Related Documentation
----------------------
-
-* [Atlassian REST API design guidelines version 1](https://developer.atlassian.com/server/framework/atlassian-sdk/atlassian-rest-api-design-guidelines-version-1/)
-* [Introduction to the Atlassian Plugin SDK](https://developer.atlassian.com/display/DOCS/Introduction+to+the+Atlassian+Plugin+SDK)
 
 Resources
 ---------
 
-Documentation in README TBD, use REST-API Browser [url_to_bitbucket]/plugins/servlet/restbrowser in order to examine REST endpoints.
+The documentation can be found [HERE](index.adoc).
