@@ -1,0 +1,326 @@
+= ConfAPI for Bitbucket
+opensource@aservo.com
+1
+:toc: left
+:numbered:
+:toclevels: 3
+:source-highlighter: highlightjs
+:keywords: openapi, rest, ConfAPI for Bitbucket 
+:specDir: src/main/resources/doc/
+:snippetDir: 
+:generator-template: v1 2019-12-20
+:info-url: https://github.com/aservo/confapi-bitbucket-plugin
+:app-name: ConfAPI for Bitbucket
+
+[abstract]
+.Abstract
+This plugin provides methods for accessing configuration for Bitbucket.
+
+
+// markup not found, no include::{specDir}intro.adoc[opts=optional]
+
+
+== Access
+
+* *HTTP Basic* Authentication _basicAuth_
+
+
+
+
+
+== Endpoints
+
+
+[.Ping]
+=== Ping
+
+
+[.getPing]
+==== getPing
+    
+`GET /ping`
+
+Simple ping method for probing the REST api. Returns 'pong' upon success
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}ping/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* text/plain
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 0
+| default response
+|  <<>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}ping/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}ping/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :ping/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}ping/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Settings]
+=== Settings
+
+
+[.getSettings]
+==== getSettings
+    
+`GET /settings`
+
+Get the application settings
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<SettingsBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<SettingsBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setSettings]
+==== setSettings
+    
+`PUT /settings`
+
+Set the application settings
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| SettingsBean 
+|  <<SettingsBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<SettingsBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<SettingsBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[#models]
+== Models
+
+
+[#ErrorCollection]
+=== _ErrorCollection_ 
+
+
+
+[.fields-ErrorCollection]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| errorMessages 
+|  
+| List  of <<string>> 
+| 
+|  
+
+|===
+
+
+[#SettingsBean]
+=== _SettingsBean_ 
+
+
+
+[.fields-SettingsBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| baseUrl 
+|  
+| String  
+| 
+|  
+
+| mode 
+|  
+| String  
+| 
+|  
+
+| title 
+|  
+| String  
+| 
+|  
+
+|===
+
+

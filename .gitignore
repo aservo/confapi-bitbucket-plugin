@@ -1,16 +1,15 @@
 # Build files
-/target/
+/target
 
 # Temp files
 .*.sw[a-p]
 *~
 
 # IDEA files
-/.idea/
+/.idea
 *.iml
 
 # Private keys
 *.asc
 
-# libs
-/lib/
+.openapi-generator*
