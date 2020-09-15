@@ -44,7 +44,7 @@ public class SettingsServiceImplTest {
         final SettingsBean bean = settingsServiceImpl.getSettings();
 
         assertNotNull(applicationPropertiesService.getBaseUrl());
-        assertEquals(applicationPropertiesService.getBaseUrl().toString(), bean.getBaseUrl());
+        assertEquals(applicationPropertiesService.getBaseUrl(), bean.getBaseUrl());
         assertEquals(applicationPropertiesService.getMode().getId(), bean.getMode());
         assertEquals(applicationPropertiesService.getDisplayName(), bean.getTitle());
     }

@@ -9,7 +9,6 @@ import de.aservo.confapi.commons.service.api.SettingsService;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.constraints.NotNull;
-import java.net.URI;
 
 @Named
 @ExportAsService
@@ -29,7 +28,7 @@ public class SettingsServiceImpl implements SettingsService {
         final SettingsBean settingsBean = new SettingsBean();
 
         if (applicationPropertiesService.getBaseUrl() != null) {
-            settingsBean.setBaseUrl(applicationPropertiesService.getBaseUrl().toString());
+            settingsBean.setBaseUrl(applicationPropertiesService.getBaseUrl());
         }
 
         settingsBean.setTitle(applicationPropertiesService.getDisplayName());
@@ -44,7 +43,7 @@ public class SettingsServiceImpl implements SettingsService {
             @NotNull SettingsBean settingsBean) {
 
         if (settingsBean.getBaseUrl() != null) {
-            applicationPropertiesService.setBaseURL(URI.create(settingsBean.getBaseUrl()));
+            applicationPropertiesService.setBaseURL(settingsBean.getBaseUrl());
         }
 
         // Cannot set mode using ApplicationPropertiesService

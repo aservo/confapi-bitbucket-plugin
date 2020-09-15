@@ -31,6 +31,284 @@ This plugin provides methods for accessing configuration for Bitbucket.
 == Endpoints
 
 
+[.ApplicationLinks]
+=== ApplicationLinks
+
+
+[.addApplicationLink]
+==== addApplicationLink
+    
+`POST /application-links`
+
+Add a single application link
+
+===== Description 
+
+Upon successful request, returns the added `ApplicationLinkBean` object
+
+
+// markup not found, no include::{specDir}application-links/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ApplicationLinkBean 
+|  <<ApplicationLinkBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ignore-setup-errors 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<ApplicationLinkBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<ApplicationLinkBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getApplicationLinks]
+==== getApplicationLinks
+    
+`GET /application-links`
+
+Get all application links
+
+===== Description 
+
+Upon successful request, returns a `ApplicationLinksBean` object containing all application links
+
+
+// markup not found, no include::{specDir}application-links/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<ApplicationLinksBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<ApplicationLinksBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setApplicationLinks]
+==== setApplicationLinks
+    
+`PUT /application-links`
+
+Set a new set of application links
+
+===== Description 
+
+Upon successful request, returns a `ApplicationLinksBean` object containing all application links
+
+
+// markup not found, no include::{specDir}application-links/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ApplicationLinksBean 
+|  <<ApplicationLinksBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ignore-setup-errors 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<ApplicationLinksBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<ApplicationLinksBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Ping]
 === Ping
 
@@ -274,6 +552,92 @@ endif::internal-generation[]
 == Models
 
 
+[#ApplicationLinkBean]
+=== _ApplicationLinkBean_ 
+
+
+
+[.fields-ApplicationLinkBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| serverId 
+|  
+| String  
+| 
+|  
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| type 
+| X 
+| String  
+| 
+|  _Enum:_ BAMBOO, JIRA, BITBUCKET, CONFLUENCE, FISHEYE, CROWD, 
+
+| displayUrl 
+| X 
+| URI  
+| 
+| uri 
+
+| rpcUrl 
+| X 
+| URI  
+| 
+| uri 
+
+| primary 
+|  
+| Boolean  
+| 
+|  
+
+| status 
+|  
+| String  
+| 
+|  _Enum:_ AVAILABLE, UNAVAILABLE, CONFIGURATION_ERROR, 
+
+| username 
+|  
+| String  
+| 
+|  
+
+| password 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#ApplicationLinksBean]
+=== _ApplicationLinksBean_ 
+
+
+
+[.fields-ApplicationLinksBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| applicationLinks 
+|  
+| List  of <<ApplicationLinkBean>> 
+| 
+|  
+
+|===
+
+
 [#ErrorCollection]
 === _ErrorCollection_ 
 
@@ -305,9 +669,9 @@ endif::internal-generation[]
 
 | baseUrl 
 |  
-| String  
+| URI  
 | 
-|  
+| uri 
 
 | mode 
 |  

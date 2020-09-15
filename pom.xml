@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>confapi-bitbucket-plugin</artifactId>
-    <version>0.0.2-SNAPSHOT</version>
+    <version>0.0.3-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Bitbucket</name>
@@ -59,7 +59,7 @@
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
         <atlassian.plugins.rest.version>5.0.1</atlassian.plugins.rest.version>
-        <confapi-commons.version>0.0.18-SNAPSHOT</confapi-commons.version>
+        <confapi-commons.version>0.0.20-SNAPSHOT</confapi-commons.version>
         <javax.inject.version>1</javax.inject.version>
         <jsr311.version>1.1.1</jsr311.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
@@ -114,6 +114,24 @@
         </dependency>
 
         <dependency>
+            <groupId>com.atlassian.applinks</groupId>
+            <artifactId>applinks-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.applinks</groupId>
+            <artifactId>applinks-spi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.applinks</groupId>
+            <artifactId>applinks-plugin</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
             <version>${atlassian.spring.scanner.version}</version>
@@ -146,15 +164,9 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>javax.el</artifactId>
-            <version>2.2.6</version>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- test dependencies -->
