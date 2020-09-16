@@ -60,6 +60,7 @@
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
         <atlassian.plugins.rest.version>5.0.1</atlassian.plugins.rest.version>
         <confapi-commons.version>0.0.20-SNAPSHOT</confapi-commons.version>
+        <crowd-remote.version>4.0.1</crowd-remote.version>
         <javax.inject.version>1</javax.inject.version>
         <jsr311.version>1.1.1</jsr311.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
@@ -135,6 +136,19 @@
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
             <version>${atlassian.spring.scanner.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>crowd-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>crowd-remote</artifactId>
+            <version>${crowd-remote.version}</version>
             <scope>provided</scope>
         </dependency>
 

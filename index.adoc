@@ -309,6 +309,284 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.Directories]
+=== Directories
+
+
+[.addDirectory]
+==== addDirectory
+    
+`POST /directories`
+
+Adds a new directory
+
+===== Description 
+
+Adds a new user directory to the existing list of directories
+
+
+// markup not found, no include::{specDir}directories/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| AbstractDirectoryBean 
+|  <<AbstractDirectoryBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| test-connection 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<AbstractDirectoryBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<AbstractDirectoryBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getDirectories]
+==== getDirectories
+    
+`GET /directories`
+
+Get the list of user directories
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<DirectoriesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<DirectoriesBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setDirectories]
+==== setDirectories
+    
+`PUT /directories`
+
+Set a new list of directories
+
+===== Description 
+
+Any existing directories with the same names will be removed before adding the new ones
+
+
+// markup not found, no include::{specDir}directories/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| DirectoriesBean 
+|  <<DirectoriesBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| test-connection 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<DirectoriesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<DirectoriesBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Ping]
 === Ping
 
@@ -552,6 +830,73 @@ endif::internal-generation[]
 == Models
 
 
+[#AbstractDirectoryBean]
+=== _AbstractDirectoryBean_ 
+
+
+
+[.fields-AbstractDirectoryBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| server 
+|  
+| DirectoryLdapServer  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryLdapPermissions  
+| 
+|  
+
+| advanced 
+|  
+| DirectoryInternalAdvanced  
+| 
+|  
+
+| credentialPolicy 
+|  
+| DirectoryInternalCredentialPolicy  
+| 
+|  
+
+| schema 
+|  
+| DirectoryLdapSchema  
+| 
+|  
+
+|===
+
+
 [#ApplicationLinkBean]
 === _ApplicationLinkBean_ 
 
@@ -632,6 +977,615 @@ endif::internal-generation[]
 | applicationLinks 
 |  
 | List  of <<ApplicationLinkBean>> 
+| 
+|  
+
+|===
+
+
+[#DirectoriesBean]
+=== _DirectoriesBean_ 
+
+
+
+[.fields-DirectoriesBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| directories 
+|  
+| List  of <<AbstractDirectoryBean>> 
+| 
+|  
+
+|===
+
+
+[#DirectoryCrowdAdvanced]
+=== _DirectoryCrowdAdvanced_ 
+
+
+
+[.fields-DirectoryCrowdAdvanced]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| enableNestedGroups 
+|  
+| Boolean  
+| 
+|  
+
+| enableIncrementalSync 
+|  
+| Boolean  
+| 
+|  
+
+| updateGroupMembershipMethod 
+|  
+| String  
+| 
+|  
+
+| updateSyncIntervalInMinutes 
+|  
+| Integer  
+| 
+| int32 
+
+|===
+
+
+[#DirectoryCrowdBean]
+=== _DirectoryCrowdBean_ 
+
+
+
+[.fields-DirectoryCrowdBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| server 
+|  
+| DirectoryCrowdServer  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryCrowdPermissions  
+| 
+|  
+
+| advanced 
+|  
+| DirectoryCrowdAdvanced  
+| 
+|  
+
+|===
+
+
+[#DirectoryCrowdPermissions]
+=== _DirectoryCrowdPermissions_ 
+
+
+
+[.fields-DirectoryCrowdPermissions]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| readOnly 
+|  
+| Boolean  
+| 
+|  
+
+| fullAccess 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#DirectoryCrowdServer]
+=== _DirectoryCrowdServer_ 
+
+
+
+[.fields-DirectoryCrowdServer]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| url 
+| X 
+| URI  
+| 
+| uri 
+
+| proxy 
+|  
+| DirectoryCrowdServerProxy  
+| 
+|  
+
+| appUsername 
+| X 
+| String  
+| 
+|  
+
+| appPassword 
+| X 
+| String  
+| 
+|  
+
+| connectionTimeoutInMillis 
+|  
+| Long  
+| 
+| int64 
+
+| maxConnections 
+|  
+| Integer  
+| 
+| int32 
+
+|===
+
+
+[#DirectoryCrowdServerProxy]
+=== _DirectoryCrowdServerProxy_ 
+
+
+
+[.fields-DirectoryCrowdServerProxy]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| host 
+|  
+| String  
+| 
+|  
+
+| port 
+|  
+| Integer  
+| 
+| int32 
+
+| username 
+|  
+| String  
+| 
+|  
+
+| password 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#DirectoryGenericBean]
+=== _DirectoryGenericBean_ 
+
+
+
+[.fields-DirectoryGenericBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#DirectoryInternalAdvanced]
+=== _DirectoryInternalAdvanced_ 
+
+
+
+[.fields-DirectoryInternalAdvanced]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| enableNestedGroups 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#DirectoryInternalBean]
+=== _DirectoryInternalBean_ 
+
+
+
+[.fields-DirectoryInternalBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| credentialPolicy 
+|  
+| DirectoryInternalCredentialPolicy  
+| 
+|  
+
+| advanced 
+|  
+| DirectoryInternalAdvanced  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryInternalPermissions  
+| 
+|  
+
+|===
+
+
+[#DirectoryInternalCredentialPolicy]
+=== _DirectoryInternalCredentialPolicy_ 
+
+
+
+[.fields-DirectoryInternalCredentialPolicy]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| passwordRegex 
+|  
+| String  
+| 
+|  
+
+| passwordComplexityMessage 
+|  
+| String  
+| 
+|  
+
+| passwordMaxAttempts 
+|  
+| Long  
+| 
+| int64 
+
+| passwordHistoryCount 
+|  
+| Long  
+| 
+| int64 
+
+| passwordMaxChangeTime 
+|  
+| Long  
+| 
+| int64 
+
+| passwordExpiryNotificationDays 
+|  
+| List  of <<integer>> 
+| 
+| int32 
+
+| passwordEncryptionMethod 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#DirectoryInternalPermissions]
+=== _DirectoryInternalPermissions_ 
+
+
+
+[.fields-DirectoryInternalPermissions]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| addGroup 
+|  
+| Boolean  
+| 
+|  
+
+| addUser 
+|  
+| Boolean  
+| 
+|  
+
+| modifyGroup 
+|  
+| Boolean  
+| 
+|  
+
+| modifyUser 
+|  
+| Boolean  
+| 
+|  
+
+| modifyGroupAttributes 
+|  
+| Boolean  
+| 
+|  
+
+| modifyUserAttributes 
+|  
+| Boolean  
+| 
+|  
+
+| removeGroup 
+|  
+| Boolean  
+| 
+|  
+
+| removeUser 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#DirectoryLdapBean]
+=== _DirectoryLdapBean_ 
+
+
+
+[.fields-DirectoryLdapBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| server 
+|  
+| DirectoryLdapServer  
+| 
+|  
+
+| schema 
+|  
+| DirectoryLdapSchema  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryLdapPermissions  
+| 
+|  
+
+|===
+
+
+[#DirectoryLdapPermissions]
+=== _DirectoryLdapPermissions_ 
+
+
+
+[.fields-DirectoryLdapPermissions]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| readOnly 
+|  
+| Boolean  
+| 
+|  
+
+| readOnlyForLocalGroups 
+|  
+| Boolean  
+| 
+|  
+
+| fullAccess 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#DirectoryLdapSchema]
+=== _DirectoryLdapSchema_ 
+
+
+
+[.fields-DirectoryLdapSchema]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| baseDn 
+|  
+| String  
+| 
+|  
+
+| userDn 
+|  
+| String  
+| 
+|  
+
+| groupDn 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#DirectoryLdapServer]
+=== _DirectoryLdapServer_ 
+
+
+
+[.fields-DirectoryLdapServer]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| host 
+| X 
+| String  
+| 
+|  
+
+| port 
+|  
+| Integer  
+| 
+| int32 
+
+| useSsl 
+|  
+| Boolean  
+| 
+|  
+
+| username 
+|  
+| String  
+| 
+|  
+
+| password 
+|  
+| String  
 | 
 |  
 
