@@ -49,7 +49,7 @@ public class SysadminOnlyResourceFilterTest {
 
         final ApplicationUser applicationUser = mock(ApplicationUser.class);
         doReturn(Optional.of(applicationUser)).when(authentication).getUser();
-        doReturn(true).when(permissionService).hasUserPermission(applicationUser, SYS_ADMIN);
+        doReturn(true).when(permissionService).hasGlobalPermission(applicationUser, SYS_ADMIN);
 
         assertNull(sysadminOnlyResourceFilter.filter(null));
     }

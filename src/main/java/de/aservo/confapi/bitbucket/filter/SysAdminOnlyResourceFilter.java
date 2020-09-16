@@ -40,7 +40,7 @@ public class SysAdminOnlyResourceFilter implements ResourceFilter, ContainerRequ
     }
 
     public boolean isSystemAdministrator(ApplicationUser user) {
-        return permissionService.hasUserPermission(user, SYS_ADMIN);
+        return permissionService.hasGlobalPermission(user, SYS_ADMIN);
     }
 
     // these methods should be implemented in abstract parents in commons, but how to deal with Atlassian deps?
