@@ -52,7 +52,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ApplicationLinkServiceTest {
+public class ApplicationLinksServiceTest {
 
     @Mock
     private MutatingApplicationLinkService mutatingApplicationLinkService;
@@ -66,11 +66,11 @@ public class ApplicationLinkServiceTest {
     @Mock
     private Validator validator;
 
-    private ApplicationLinkServiceImpl applicationLinkService;
+    private ApplicationLinksServiceImpl applicationLinkService;
 
     @Before
     public void setup() {
-        applicationLinkService = new ApplicationLinkServiceImpl(mutatingApplicationLinkService, typeAccessor, applinkStatusService, validator);
+        applicationLinkService = new ApplicationLinksServiceImpl(mutatingApplicationLinkService, typeAccessor, applinkStatusService, validator);
     }
 
     @Test

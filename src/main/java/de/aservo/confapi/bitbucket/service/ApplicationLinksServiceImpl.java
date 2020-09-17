@@ -44,9 +44,9 @@ import static de.aservo.confapi.commons.util.BeanValidationUtil.processValidatio
 
 @Named
 @ExportAsService(ApplicationLinksService.class)
-public class ApplicationLinkServiceImpl implements ApplicationLinksService {
+public class ApplicationLinksServiceImpl implements ApplicationLinksService {
 
-    private static final Logger log = LoggerFactory.getLogger(ApplicationLinkServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(ApplicationLinksServiceImpl.class);
 
     private final MutatingApplicationLinkService mutatingApplicationLinkService;
     private final TypeAccessor typeAccessor;
@@ -54,10 +54,10 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
     private final Validator validator;
 
     @Inject
-    public ApplicationLinkServiceImpl(@ComponentImport MutatingApplicationLinkService mutatingApplicationLinkService,
-                                      @ComponentImport TypeAccessor typeAccessor,
-                                      @ComponentImport ApplinkStatusService applinkStatusService,
-                                      @ComponentImport Validator validator) {
+    public ApplicationLinksServiceImpl(@ComponentImport MutatingApplicationLinkService mutatingApplicationLinkService,
+                                       @ComponentImport TypeAccessor typeAccessor,
+                                       @ComponentImport ApplinkStatusService applinkStatusService,
+                                       @ComponentImport Validator validator) {
         this.mutatingApplicationLinkService = mutatingApplicationLinkService;
         this.typeAccessor = typeAccessor;
         this.applinkStatusService = applinkStatusService;
