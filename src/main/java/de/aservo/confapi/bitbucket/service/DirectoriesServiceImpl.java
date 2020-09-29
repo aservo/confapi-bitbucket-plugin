@@ -27,15 +27,15 @@ import static java.lang.String.format;
 
 @Named
 @ExportAsService(DirectoriesService.class)
-public class DirectoryServiceImpl implements DirectoriesService {
+public class DirectoriesServiceImpl implements DirectoriesService {
 
-    private static final Logger log = LoggerFactory.getLogger(DirectoryServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(DirectoriesServiceImpl.class);
 
     private final CrowdDirectoryService crowdDirectoryService;
     private final Validator validator;
 
     @Inject
-    public DirectoryServiceImpl(
+    public DirectoriesServiceImpl(
             @ComponentImport CrowdDirectoryService crowdDirectoryService,
             @ComponentImport Validator validator) {
         this.crowdDirectoryService = checkNotNull(crowdDirectoryService);

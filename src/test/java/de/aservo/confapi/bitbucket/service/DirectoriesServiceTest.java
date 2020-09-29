@@ -19,7 +19,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
-import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -37,7 +36,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DirectoryServiceTest {
+public class DirectoriesServiceTest {
 
     @Mock
     private CrowdDirectoryService crowdDirectoryService;
@@ -45,15 +44,15 @@ public class DirectoryServiceTest {
     @Mock
     private Validator validator;
 
-    private DirectoryServiceImpl directoryService;
+    private DirectoriesServiceImpl directoryService;
 
     @Before
     public void setup() {
-        directoryService = new DirectoryServiceImpl(crowdDirectoryService, validator);
+        directoryService = new DirectoriesServiceImpl(crowdDirectoryService, validator);
     }
 
     @Test
-    public void testGetDirectories() throws URISyntaxException {
+    public void testGetDirectories() {
         Directory directory = createDirectory();
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
