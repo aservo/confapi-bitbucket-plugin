@@ -14,6 +14,7 @@ import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import de.aservo.confapi.bitbucket.settings.setup.DefaultApplicationLink;
 import de.aservo.confapi.bitbucket.settings.setup.DefaultApplicationType;
 import de.aservo.confapi.commons.model.ApplicationLinkBean;
+import de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -37,7 +38,7 @@ public class ApplicationLinkBeanUtilTest {
         final URI rpcUri = new URI("http://rpc.example.com");
         final ApplicationLink applicationLink = new DefaultApplicationLink(
                 applicationId, new DefaultApplicationType(), "test", displayUri, rpcUri, false, false);
-        final ApplicationLinkBean bean = ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
+        final ApplicationLinkBean bean =ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
 
         assertNotNull(bean);
         assertEquals(bean.getName(), applicationLink.getName());
@@ -60,7 +61,7 @@ public class ApplicationLinkBeanUtilTest {
 
     @Test
     public void testLinkTypeGenerator() throws URISyntaxException {
-        for (ApplicationLinkBean.ApplicationLinkTypes linkType : ApplicationLinkBean.ApplicationLinkTypes.values()) {
+        for (ApplicationLinkType linkType : ApplicationLinkType.values()) {
             ApplicationType applicationType = null;
             switch (linkType) {
                 case BAMBOO:
