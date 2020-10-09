@@ -40,11 +40,11 @@ This plugin provides methods for accessing configuration for Bitbucket.
     
 `POST /application-links`
 
-Add a single application link
+Add an application link
 
 ===== Description 
 
-Upon successful request, returns the added `ApplicationLinkBean` object
+
 
 
 // markup not found, no include::{specDir}application-links/POST/spec.adoc[opts=optional]
@@ -103,12 +103,12 @@ Upon successful request, returns the added `ApplicationLinkBean` object
 
 
 | 200
-| 
+| Returns the added application link.
 |  <<ApplicationLinkBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -135,6 +135,269 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.deleteApplicationLink]
+==== deleteApplicationLink
+    
+`DELETE /application-links/{uuid}`
+
+Delete an application link
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}application-links/\{uuid\}/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| uuid 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns an empty body.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/\{uuid\}/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/\{uuid\}/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/{uuid}/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/\{uuid\}/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.deleteApplicationLinks]
+==== deleteApplicationLinks
+    
+`DELETE /application-links`
+
+Delete all application links
+
+===== Description 
+
+NOTE: The 'force' parameter must be set to 'true' in order to execute this request.
+
+
+// markup not found, no include::{specDir}application-links/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| force 
+|   
+| - 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns an empty body.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getApplicationLink]
+==== getApplicationLink
+    
+`GET /application-links/{uuid}`
+
+Get an application link
+
+===== Description 
+
+Upon successful request, 
+
+
+// markup not found, no include::{specDir}application-links/\{uuid\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| uuid 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+<<ApplicationLinkBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the requested application link.
+|  <<ApplicationLinkBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/\{uuid\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/\{uuid\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/{uuid}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/\{uuid\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.getApplicationLinks]
 ==== getApplicationLinks
     
@@ -144,7 +407,7 @@ Get all application links
 
 ===== Description 
 
-Upon successful request, returns a `ApplicationLinksBean` object containing all application links
+
 
 
 // markup not found, no include::{specDir}application-links/GET/spec.adoc[opts=optional]
@@ -177,12 +440,12 @@ Upon successful request, returns a `ApplicationLinksBean` object containing all 
 
 
 | 200
-| 
+| Returns all application links.
 |  <<ApplicationLinksBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -209,16 +472,129 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.setApplicationLink]
+==== setApplicationLink
+    
+`PUT /application-links/{uuid}`
+
+Update an application link
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}application-links/\{uuid\}/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| uuid 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ApplicationLinkBean 
+|  <<ApplicationLinkBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ignore-setup-errors 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<ApplicationLinkBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the updated application link.
+|  <<ApplicationLinkBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/\{uuid\}/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/\{uuid\}/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/{uuid}/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/\{uuid\}/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.setApplicationLinks]
 ==== setApplicationLinks
     
 `PUT /application-links`
 
-Set a new set of application links
+Set or update a list of application links
 
 ===== Description 
 
-Upon successful request, returns a `ApplicationLinksBean` object containing all application links
+NOTE: All existing application links with the same 'rpcUrl' attribute are updated.
 
 
 // markup not found, no include::{specDir}application-links/PUT/spec.adoc[opts=optional]
@@ -277,12 +653,12 @@ Upon successful request, returns a `ApplicationLinksBean` object containing all 
 
 
 | 200
-| 
+| Returns all application links.
 |  <<ApplicationLinksBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -318,11 +694,11 @@ endif::internal-generation[]
     
 `POST /directories`
 
-Adds a new directory
+Add a user directory
 
 ===== Description 
 
-Adds a new user directory to the existing list of directories
+
 
 
 // markup not found, no include::{specDir}directories/POST/spec.adoc[opts=optional]
@@ -381,12 +757,12 @@ Adds a new user directory to the existing list of directories
 
 
 | 200
-| 
+| Returns the added directory.
 |  <<AbstractDirectoryBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -413,12 +789,188 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.deleteDirectories]
+==== deleteDirectories
+    
+`DELETE /directories`
+
+Delete all user directories
+
+===== Description 
+
+NOTE: The 'force' parameter must be set to 'true' in order to execute this request.
+
+
+// markup not found, no include::{specDir}directories/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| force 
+|   
+| - 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns an empty body.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.deleteDirectory]
+==== deleteDirectory
+    
+`DELETE /directories/{id}`
+
+Delete a user directory
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/\{id\}/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns an empty body.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/{id}/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/\{id\}/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.getDirectories]
 ==== getDirectories
     
 `GET /directories`
 
-Get the list of user directories
+Get all user directories
 
 ===== Description 
 
@@ -455,12 +1007,12 @@ Get the list of user directories
 
 
 | 200
-| 
+| Returns all directories.
 |  <<DirectoriesBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -487,16 +1039,103 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.getDirectory]
+==== getDirectory
+    
+`GET /directories/{id}`
+
+Get a user directory
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/\{id\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+<<AbstractDirectoryBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the requested directory.
+|  <<AbstractDirectoryBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/{id}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/\{id\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.setDirectories]
 ==== setDirectories
     
 `PUT /directories`
 
-Set a new list of directories
+Set or update a list of user directories
 
 ===== Description 
 
-Any existing directories with the same names will be removed before adding the new ones
+NOTE: All existing directories with the same 'name' attribute are updated.
 
 
 // markup not found, no include::{specDir}directories/PUT/spec.adoc[opts=optional]
@@ -555,12 +1194,12 @@ Any existing directories with the same names will be removed before adding the n
 
 
 | 200
-| 
+| Returns all directories.
 |  <<DirectoriesBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -587,6 +1226,119 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.setDirectory]
+==== setDirectory
+    
+`PUT /directories/{id}`
+
+Update a user directory
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/\{id\}/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| AbstractDirectoryBean 
+|  <<AbstractDirectoryBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| test-connection 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<AbstractDirectoryBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the updated directory.
+|  <<AbstractDirectoryBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/{id}/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/\{id\}/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Ping]
 === Ping
 
@@ -596,7 +1348,7 @@ endif::internal-generation[]
     
 `GET /ping`
 
-Simple ping method for probing the REST api. Returns 'pong' upon success
+Ping method for probing the REST API.
 
 ===== Description 
 
@@ -621,9 +1373,6 @@ Simple ping method for probing the REST api. Returns 'pong' upon success
 
 -
 
-===== Content Type
-
-* text/plain
 
 ===== Responses
 
@@ -633,8 +1382,8 @@ Simple ping method for probing the REST api. Returns 'pong' upon success
 | Code | Message | Datatype 
 
 
-| 0
-| default response
+| 200
+| Returns &#39;pong&#39;
 |  <<>>
 
 |===         
@@ -707,12 +1456,12 @@ Get the application settings
 
 
 | 200
-| 
+| Returns the application settings
 |  <<SettingsBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -794,12 +1543,12 @@ Set the application settings
 
 
 | 200
-| 
+| Returns the application settings
 |  <<SettingsBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -907,11 +1656,11 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| serverId 
+| uuid 
 |  
-| String  
+| UUID  
 | 
-|  
+| uuid 
 
 | name 
 | X 

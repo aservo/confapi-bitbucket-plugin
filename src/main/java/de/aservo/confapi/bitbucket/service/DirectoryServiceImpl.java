@@ -2,11 +2,15 @@ package de.aservo.confapi.bitbucket.service;
 
 import com.atlassian.crowd.embedded.api.CrowdDirectoryService;
 import com.atlassian.crowd.embedded.api.Directory;
+import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
+import com.atlassian.crowd.model.directory.ImmutableDirectory;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.confapi.bitbucket.model.util.DirectoryBeanUtil;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
+import de.aservo.confapi.commons.exception.BadRequestException;
+import de.aservo.confapi.commons.exception.NotFoundException;
+import de.aservo.confapi.commons.exception.ServiceUnavailableException;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryCrowdBean;
@@ -16,14 +20,14 @@ import org.slf4j.LoggerFactory;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.Validator;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
-import static de.aservo.confapi.commons.util.BeanValidationUtil.processValidationResult;
 import static java.lang.String.format;
 
 @Named
@@ -31,16 +35,13 @@ import static java.lang.String.format;
 public class DirectoryServiceImpl implements DirectoriesService {
 
     private static final Logger log = LoggerFactory.getLogger(DirectoryServiceImpl.class);
+    public static final int RETRY_AFTER_IN_SECONDS = 5;
 
     private final CrowdDirectoryService crowdDirectoryService;
-    private final Validator validator;
 
     @Inject
-    public DirectoryServiceImpl(
-            @ComponentImport CrowdDirectoryService crowdDirectoryService,
-            @ComponentImport Validator validator) {
+    public DirectoryServiceImpl(@ComponentImport CrowdDirectoryService crowdDirectoryService) {
         this.crowdDirectoryService = checkNotNull(crowdDirectoryService);
-        this.validator = validator;
     }
 
     @Override
@@ -55,44 +56,56 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public AbstractDirectoryBean getDirectory(long l) {
-        return null;
+    public AbstractDirectoryBean getDirectory(long id) {
+        Directory directory = findDirectory(id);
+        return DirectoryBeanUtil.toDirectoryBean(directory);
     }
 
     @Override
     public DirectoriesBean setDirectories(DirectoriesBean directoriesBean, boolean testConnection) {
-        directoriesBean.getDirectories().forEach(directoryBaseBean -> {
-            if (directoryBaseBean instanceof DirectoryCrowdBean) {
 
-                //preps and validation
-                DirectoryCrowdBean crowdBean = (DirectoryCrowdBean)directoryBaseBean;
-                Directory directory = validateAndCreateDirectoryConfig(crowdBean, testConnection);
+        final Map<String, Directory> existingDirectoriesByName = crowdDirectoryService.findAllDirectories().stream()
+                .collect(Collectors.toMap(Directory::getName, Function.identity()));
 
-                //check if directory exists already and if yes, remove it
-                Optional<Directory> presentDirectory = crowdDirectoryService.findAllDirectories().stream()
-                        .filter(dir -> dir.getName().equals(directory.getName())).findFirst();
-                if (presentDirectory.isPresent()) {
-                    Directory presentDir = presentDirectory.get();
-                    log.info("removing existing user directory configuration '{}' before adding new configuration '{}'", presentDir.getName(), directory.getName());
-                    try {
-                        crowdDirectoryService.removeDirectory(presentDir.getId());
-                    } catch (DirectoryCurrentlySynchronisingException e) {
-                        throw new InternalServerErrorException(e.getMessage());
-                    }
+        for (AbstractDirectoryBean directoryRequestBean : directoriesBean.getDirectories()) {
+            if (directoryRequestBean instanceof DirectoryCrowdBean) {
+                DirectoryCrowdBean crowdRequestBean = (DirectoryCrowdBean)directoryRequestBean;
+
+                if (existingDirectoriesByName.containsKey(crowdRequestBean.getName())) {
+                    setDirectory(existingDirectoriesByName.get(crowdRequestBean.getName()).getId(), crowdRequestBean, testConnection);
+                } else {
+                    addDirectory(crowdRequestBean, testConnection);
                 }
-
-                //add new directory
-                crowdDirectoryService.addDirectory(directory);
             } else {
-                throw new InternalServerErrorException(format("Setting directory type '%s' is not supported (yet)", directoryBaseBean.getClass()));
+                throw new BadRequestException(format("Updating directory type '%s' is not supported (yet)", directoryRequestBean.getClass()));
             }
-        });
+        }
+
         return getDirectories();
     }
 
     @Override
-    public AbstractDirectoryBean setDirectory(long l, @NotNull AbstractDirectoryBean abstractDirectoryBean, boolean b) {
-        return null;
+    public AbstractDirectoryBean setDirectory(long id, @NotNull AbstractDirectoryBean abstractDirectoryBean, boolean testConnection) {
+        if (abstractDirectoryBean instanceof DirectoryCrowdBean) {
+            return setDirectoryCrowd(id, (DirectoryCrowdBean) abstractDirectoryBean, testConnection);
+        } else {
+            throw new BadRequestException(format("Setting directory type '%s' is not supported (yet)", abstractDirectoryBean.getClass()));
+        }
+    }
+
+    private AbstractDirectoryBean setDirectoryCrowd(long id, @NotNull DirectoryCrowdBean crowdBean, boolean testConnection) {
+        Directory existingDirectory = findDirectory(id);
+        Directory directory = validateAndCreateDirectoryConfig(crowdBean, testConnection);
+
+        ImmutableDirectory.Builder directoryBuilder = ImmutableDirectory.builder(existingDirectory);
+        directoryBuilder.setAttributes(directory.getAttributes());
+        directoryBuilder.setDescription(directory.getDescription());
+        directoryBuilder.setName(directory.getName());
+        directoryBuilder.setActive(directory.isActive());
+        Directory updatedDirectory = directoryBuilder.build();
+
+        Directory responseDirectory = crowdDirectoryService.updateDirectory(updatedDirectory);
+        return DirectoryBeanUtil.toDirectoryBean(responseDirectory);
     }
 
     @Override
@@ -103,22 +116,48 @@ public class DirectoryServiceImpl implements DirectoriesService {
             Directory addedDirectory = crowdDirectoryService.addDirectory(directory);
             return DirectoryBeanUtil.toDirectoryBean(addedDirectory);
         } else {
-            throw new InternalServerErrorException(format("Adding directory type '%s' is not supported (yet)", abstractDirectoryBean.getClass()));
+            throw new BadRequestException(format("Adding directory type '%s' is not supported (yet)", abstractDirectoryBean.getClass()));
         }
     }
 
     @Override
-    public void deleteDirectories(boolean b) {
+    public void deleteDirectories(boolean force) {
+        if (!force) {
+            throw new BadRequestException("'force = true' must be supplied to delete all entries");
+        } else {
+            for (Directory directory : crowdDirectoryService.findAllDirectories()) {
 
+                //do not remove the internal directory
+                if (!DirectoryType.INTERNAL.equals(directory.getType())) {
+                    deleteDirectory(directory.getId());
+                }
+            }
+        }
     }
 
     @Override
-    public void deleteDirectory(long l) {
+    public void deleteDirectory(long id) {
 
+        //ensure the directory exists
+        findDirectory(id);
+
+        //delete the directory
+        try {
+            crowdDirectoryService.removeDirectory(id);
+        } catch (DirectoryCurrentlySynchronisingException e) {
+            throw new ServiceUnavailableException(e, RETRY_AFTER_IN_SECONDS);
+        }
+    }
+
+    private Directory findDirectory(long id) {
+        Directory directory = crowdDirectoryService.findDirectoryById(id);
+        if (directory == null) {
+            throw new NotFoundException(String.format("directory with id '%s' was not found!", id));
+        }
+        return directory;
     }
 
     private Directory validateAndCreateDirectoryConfig(DirectoryCrowdBean crowdBean, boolean testConnection) {
-        processValidationResult(validator.validate(crowdBean));
         Directory directory = DirectoryBeanUtil.toDirectory(crowdBean);
         String directoryName = crowdBean.getName();
         if (testConnection) {

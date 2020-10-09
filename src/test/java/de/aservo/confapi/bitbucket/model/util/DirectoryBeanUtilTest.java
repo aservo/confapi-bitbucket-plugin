@@ -55,7 +55,7 @@ public class DirectoryBeanUtilTest {
         final DirectoryImpl directory = new DirectoryImpl("test", DirectoryType.CROWD, "test.class");
         directory.setAttribute(CROWD_SERVER_URL, "http://localhost");
         directory.setAttribute(APPLICATION_PASSWORD, "test");
-        directory.setAttribute(APPLICATION_NAME, "confluence-client");
+        directory.setAttribute(APPLICATION_NAME, "bitbucket-client");
         directory.setAttribute(CROWD_HTTP_PROXY_HOST, "http://localhost/proxy");
         directory.setAttribute(CROWD_HTTP_PROXY_PORT, "8080");
         directory.setAttribute(CROWD_HTTP_PROXY_USERNAME, "user");
