@@ -36,7 +36,7 @@ import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DirectoriesServiceTest {
+public class DirectoryServiceTest {
 
     @Mock
     private CrowdDirectoryService crowdDirectoryService;
@@ -44,11 +44,11 @@ public class DirectoriesServiceTest {
     @Mock
     private Validator validator;
 
-    private DirectoriesServiceImpl directoryService;
+    private DirectoryServiceImpl directoryService;
 
     @Before
     public void setup() {
-        directoryService = new DirectoriesServiceImpl(crowdDirectoryService, validator);
+        directoryService = new DirectoryServiceImpl(crowdDirectoryService, validator);
     }
 
     @Test
