@@ -193,22 +193,22 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testDeleteDirectoriesWithoutInternalDirectory() throws DirectoryCurrentlySynchronisingException {
+    public void testDeleteDirectoriesWithoutInternalDirectory() {
         Directory directory = createDirectory("http://localhost", DirectoryType.INTERNAL);
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
         directoryService.deleteDirectories(true);
 
-        verify(crowdDirectoryService).removeDirectory(1L);
+        verify(crowdDirectoryService).findAllDirectories();
     }
 
     @Test
-    public void testDeleteDirectory() {
+    public void testDeleteDirectory() throws DirectoryCurrentlySynchronisingException {
         doReturn(createDirectory()).when(crowdDirectoryService).findDirectoryById(1L);
 
         directoryService.deleteDirectory(1L);
 
-        verify(crowdDirectoryService).findAllDirectories();
+        verify(crowdDirectoryService).removeDirectory(1L);
     }
 
     @Test(expected = NotFoundException.class)

@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>confapi-bitbucket-plugin</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Bitbucket</name>
@@ -59,7 +59,7 @@
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
         <atlassian.plugins.rest.version>5.0.1</atlassian.plugins.rest.version>
-        <confapi-commons.version>0.0.26-SNAPSHOT</confapi-commons.version>
+        <confapi-commons.version>0.0.27-SNAPSHOT</confapi-commons.version>
         <crowd-remote.version>4.0.1</crowd-remote.version>
         <javax.inject.version>1</javax.inject.version>
         <jsr311.version>1.1.1</jsr311.version>
