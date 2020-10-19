@@ -43,8 +43,7 @@ import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLin
 import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.CONFIGURATION_ERROR;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ApplicationLinkServiceTest {
@@ -219,12 +218,13 @@ public class ApplicationLinkServiceTest {
         doReturn(Collections.singletonList(applicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
 
         applicationLinkService.deleteApplicationLinks(true);
-        assertTrue("Delete Successful", true);
+
+        verify(mutatingApplicationLinkService).deleteApplicationLink(any());
     }
 
     @Test(expected = BadRequestException.class)
     public void testDeleteApplicationLinksWithoutForceParameter() throws URISyntaxException {
-        ApplicationLink applicationLink = createApplicationLink();
+        createApplicationLink();
         applicationLinkService.deleteApplicationLinks(false);
     }
 
@@ -234,7 +234,8 @@ public class ApplicationLinkServiceTest {
         doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
 
         applicationLinkService.deleteApplicationLink(UUID.randomUUID());
-        assertTrue("Delete Successful", true);
+
+        verify(mutatingApplicationLinkService).deleteApplicationLink(any());
     }
 
     private ApplicationLinkBean createApplicationLinkBean() throws URISyntaxException {
