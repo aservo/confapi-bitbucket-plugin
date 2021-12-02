@@ -53,7 +53,7 @@
 
     <properties>
         <amps.version>8.1.1</amps.version>
-        <bitbucket.version>7.5.0</bitbucket.version>
+        <bitbucket.version>7.18.2</bitbucket.version>
         <bitbucket.data.version>${bitbucket.version}</bitbucket.data.version>
         <!-- This property ensures consistency between the key in atlassian-plugin.xml and the OSGi bundle's key. -->
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
